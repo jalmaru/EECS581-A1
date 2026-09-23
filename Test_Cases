@@ -1,0 +1,48 @@
+#Test Cases:
+192.168.01.1
+192.168.0.1
+1.2.3.4:080
+1.2.3.4:65536
+192.168.1.1.
+192..168.1.1
+10.0.0.1:8080:80
+ip1=192.168.1.1&ip2=10.0.0.1
+1.2.3.4:99999999999999999999
+server=10.0.0.255:8080end
+192a168.1.1.1
+192.168.1.1.
+Connection from 192.168.1.1 refused
+'192.168.01.1
+no number here
+
+#Responses from program:
+Enter a string (or 'END' to quit): 192.168.01.1
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): 192.168.0.1
+Extracted IPv4 address: 192.168.0.1 (decimal value: 3232235521, port: none)
+Enter a string (or 'END' to quit): 1.2.3.4:080
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): 1.2.3.4:65536
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): 192.168.1.1.
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): 192..168.1.1
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): 10.0.0.1:8080:80
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): ip1=192.168.1.1&ip2=10.0.0.1
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): 1.2.3.4:99999999999999999999
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): server=10.0.0.255:8080end
+Extracted IPv4 address: 10.0.0.255 (decimal value: 167772415, port: 8080)
+Enter a string (or 'END' to quit): 192a168.1.1.1
+Extracted IPv4 address: 168.1.1.1 (decimal value: 2818638081, port: none)
+Enter a string (or 'END' to quit): 192.168.1.1.
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): Connection from 192.168.1.1 refused
+Extracted IPv4 address: 192.168.1.1 (decimal value: 3232235777, port: none)
+Enter a string (or 'END' to quit): 192.168.01.1
+Invalid input: no valid IPv4 address found
+Enter a string (or 'END' to quit): no number here
+Invalid input: no valid IPv4 address found
