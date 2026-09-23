@@ -1,0 +1,58 @@
+﻿AI Usage: Gemini Flash, used 9/23/2026. 
+
+
+ORIGINAL PROMPT IS BELOW: I put basically all of the specs required and rules specified in this, so hopefully it works first try.
+
+
+Act as a senior C++ systems programmer. I need you to write a C++ function and a driver main program based on strict specification constraints. 
+
+
+CONSTRAINTS & FORBIDDEN LIBRARIES
+1. No string-to-number conversion functions ( std::stoi, std::stol, std::stoul, atoi, atol, strtol, strtoul, sscanf, etc.). All digit accumulation to integers/unsigned longs performed manually character-by-character
+2. No address-parsing library functions (e.g., inet_aton, inet_pton, inet_addr).
+3. No regular expression libraries ( std::regex , POSIX regex.h , etc.).
+4. Standard character classification functions like std::isdigit are allowed.
+
+
+EXACT FUNCTION SIGNATURE
+bool extractIPv4(const std::string& str, unsigned long& outAddress, int& outPort);
+
+
+FUNCTION BEHAVIOR & GRAMMAR RULES
+- The function scans the string to extract a single valid IPv4 address with an optional port embedded anywhere in str.
+-   Character set allowed in candidate token: digits 0 - 9 , periods, and colons
+- Strict Matching: A candidate token must match the complete IPv4 grammar. No partial matches inside a longer contiguous sequence of digits/dots/colons
+- Address Grammar:
+ - Exactly 4 octets separated by single periods
+ - Each octet has 1 to 3 digits.
+ - Each octet value must be between 0 and 255.
+ - Leading Zero Rule: No leading zeros allowed unless the octet value itself is strictly 0 
+- Optional Port Grammar:
+ - Port follows immediately after octet 4 preceded by a colon : .
+ - Port has 1 to 5 digits.
+ - Port value must be between 0 and 65535 inclusive.
+ - Port adheres to the exact same leading zero rule
+ - If a colon is present after the 4th octet, a valid port must follow. If the port is malformed/out of range, the entire match fails.
+- Multiple Candidates / Line Rules:
+ - The function must extract a candidate token.
+ - If a token fails validation, the search continues for subsequent candidate tokens in str .
+ - Exactly 1 valid IPv4 address must be found. 
+- Return Values:
+ - On Success: return true . Set outAddress to the 32-bit unsigned long IPv4 value in network byte order/big-endian integer value (octet1 << 24) | (octet2 << 16) | (octet3 << 8) | octet4 . Set outPort to the integer port number (or -1 if no colon/port was present).
+ - On Failure: return false . Set outAddress = 0 and outPort = -1 .
+
+
+PROGRAM / MAIN LOOP REQUIREMENTS
+- main() must run an input loop prompting the user: Enter a string (or END to quit): 
+- If the input is exactly END (case-sensitive), print Program terminated. and exit.
+- Otherwise, extractIPv4 .
+- On Success, print:
+ Extracted IPv4 address: A.B.C.D (decimal value: N, port: P) 
+- On Failure, print:
+ Invalid input: no valid IPv4 address found 
+
+
+Please write clean, well-commented C++ code implementing this exact specification.
+
+
+Result: Code was tested using test cases highlighted on the repository Test_Cases file, and it performed correctly for every one. This one prompt was enough to complete all of the requirements, as I had hoped. I read through to understand the code and re-commented everything in my own words, but I did not have to change the actual code. No known bugs or limitations.
